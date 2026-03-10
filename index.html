@@ -114,7 +114,8 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 }
 .stab:hover { color:var(--off); }
 .stab.active { color:var(--red); border-bottom-color:var(--red); }
-#tabs-spacer { height:104px; }
+/* SCROLL OFFSET for fixed nav + tabs */
+section[id], div[id] { scroll-margin-top: 110px; }
 
 /* COVER */
 .cover {
@@ -424,6 +425,14 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
   .stab { font-size:0.5rem; padding:12px 11px; }
 }
 </style>
+<script>
+function goTo(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var top = el.getBoundingClientRect().top + window.scrollY - 110;
+  window.scrollTo({ top: top, behavior: 'smooth' });
+}
+</script>
 </head>
 <body>
 
@@ -434,31 +443,31 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
     <span class="nav-title">Retail <span>Insider</span> · Media Kit 2026</span>
   </div>
   <div class="nav-links">
-    <a href="#audience" class="nav-link">Audience</a>
-    <a href="#channels" class="nav-link">Channels</a>
-    <a href="#placements" class="nav-link">Placements</a>
-    <a href="#craig" class="nav-link">About Craig</a>
+    <a onclick="goTo('audience')" class="nav-link" style="cursor:pointer">Audience</a>
+    <a onclick="goTo('channels')" class="nav-link" style="cursor:pointer">Channels</a>
+    <a onclick="goTo('placements')" class="nav-link" style="cursor:pointer">Placements</a>
+    <a onclick="goTo('craig')" class="nav-link" style="cursor:pointer">About Craig</a>
   </div>
-  <a href="#contact" class="nav-cta">Get In Touch</a>
+  <a onclick="goTo('contact')" class="nav-cta" style="cursor:pointer">Get In Touch</a>
   <button class="nav-ham" id="ham"><span></span><span></span><span></span></button>
 </nav>
 <div class="mobile-menu" id="mob-menu">
-  <a href="#audience" class="mob-link">Audience</a>
-  <a href="#channels" class="mob-link">Channels</a>
-  <a href="#placements" class="mob-link">Placements</a>
-  <a href="#craig" class="mob-link">About Craig</a>
-  <a href="#contact" class="mob-link">Get In Touch</a>
+  <a onclick="goTo('audience')" class="mob-link" style="cursor:pointer">Audience</a>
+  <a onclick="goTo('channels')" class="mob-link" style="cursor:pointer">Channels</a>
+  <a onclick="goTo('placements')" class="mob-link" style="cursor:pointer">Placements</a>
+  <a onclick="goTo('craig')" class="mob-link" style="cursor:pointer">About Craig</a>
+  <a onclick="goTo('contact')" class="mob-link" style="cursor:pointer">Get In Touch</a>
 </div>
 
 <!-- STICKY TABS -->
 <div class="sticky-tabs" id="sticky-tabs">
-  <button class="stab" data-t="overview">Overview</button>
-  <button class="stab" data-t="audience">Audience</button>
-  <button class="stab" data-t="channels">Channels</button>
-  <button class="stab" data-t="placements">Placements</button>
-  <button class="stab" data-t="advertorial">Partner Content</button>
-  <button class="stab" data-t="craig">About Craig</button>
-  <button class="stab" data-t="contact">Contact</button>
+  <button class="stab" onclick="goTo('overview')">Overview</button>
+  <button class="stab" onclick="goTo('audience')">Audience</button>
+  <button class="stab" onclick="goTo('channels')">Channels</button>
+  <button class="stab" onclick="goTo('placements')">Placements</button>
+  <button class="stab" onclick="goTo('advertorial')">Partner Content</button>
+  <button class="stab" onclick="goTo('craig')">About Craig</button>
+  <button class="stab" onclick="goTo('contact')">Contact</button>
 </div>
 <div id="tabs-spacer"></div>
 
@@ -1012,10 +1021,17 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
 
-  document.querySelectorAll('.stab').forEach(function(t) {
-    t.addEventListener('click', function() {
-      var el = document.getElementById(t.getAttribute('data-t'));
-      if (el) el.scrollIntoView({ behavior:'smooth' });
+  // UNIFIED SCROLL-TO for all data-t elements (nav, stabs, mobile)
+  document.querySelectorAll('[data-t]').forEach(function(el) {
+    el.addEventListener('click', function() {
+      var target = document.getElementById(el.getAttribute('data-t'));
+      if (target) {
+        var top = target.getBoundingClientRect().top + window.scrollY - 110;
+        window.scrollTo({ top: top, behavior: 'smooth' });
+      }
+      // close mobile menu if open
+      document.getElementById('ham').classList.remove('open');
+      document.getElementById('mob-menu').classList.remove('open');
     });
   });
 
