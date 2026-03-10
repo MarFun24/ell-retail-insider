@@ -279,14 +279,25 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 .ch-stat-label { font-size:0.58rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); }
 .ch-desc { font-size:0.92rem; color:var(--muted); line-height:1.7; margin-top:10px; }
 
-/* PLACEMENTS */
-.placements-tabs { display:flex; gap:1px; background:var(--border); margin-top:52px; position:relative; z-index:200; isolation:isolate; }
-.ptab { flex:1; padding:14px; font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); background:var(--dark); border:none; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; position:relative; z-index:200; }
+/* PLACEMENTS - pure CSS radio tabs */
+.placements-tabs-wrap { margin-top:52px; }
+.placements-tabs { display:flex; gap:1px; background:var(--border); }
+.ptab { flex:1; padding:14px; font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); background:var(--dark); font-family:'DM Sans',sans-serif; cursor:pointer; border-bottom:2px solid transparent; display:block; text-align:center; transition:all 0.2s; user-select:none; }
 .ptab:hover { color:var(--off); }
-.ptab.active { color:var(--red); background:var(--card); border-bottom-color:var(--red); }
 .placement-panels { background:var(--card); }
 .ppanel { display:none; padding:42px 36px; }
 .ppanel.active { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+
+/* Show panel and highlight tab based on checked radio */
+#pt-home:checked   ~ .placements-tabs .ptab[for="pt-home"],
+#pt-articles:checked ~ .placements-tabs .ptab[for="pt-articles"],
+#pt-enews:checked  ~ .placements-tabs .ptab[for="pt-enews"],
+#pt-newsletter:checked ~ .placements-tabs .ptab[for="pt-newsletter"] { color:var(--red); background:var(--card); border-bottom-color:var(--red); }
+
+#pt-home:checked       ~ .placement-panels #p-home      { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+#pt-articles:checked   ~ .placement-panels #p-articles  { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+#pt-enews:checked      ~ .placement-panels #p-enews     { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
+#pt-newsletter:checked ~ .placement-panels #p-newsletter { display:grid; grid-template-columns:1fr 1fr; gap:48px; }
 .pp-label { font-size:0.55rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--red); margin-bottom:12px; display:flex; align-items:center; gap:10px; }
 .pp-label::before { content:''; width:16px; height:1px; background:var(--red); }
 .pp-title { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.03em; color:var(--white); margin-bottom:12px; line-height:1.05; }
@@ -728,96 +739,104 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
   <h2 class="section-title">ADVERTISING<br>PLACEMENTS</h2>
   <div class="section-body"><p>Three high-visibility ad formats, each optimized for their context. All placements are leaderboard or square format. Limited availability ensures your brand is never lost in a cluttered environment.</p></div>
 
-  <div class="placements-tabs">
-    <button class="ptab active" data-p="p-home">Home Page</button>
-    <button class="ptab" data-p="p-articles">Exclusive Articles</button>
-    <button class="ptab" data-p="p-enews">eNews Page</button>
-    <button class="ptab" data-p="p-newsletter">Newsletter</button>
-  </div>
+  <!-- Pure CSS tabs via hidden radio inputs -->
+  <div class="placements-tabs-wrap">
+    <input type="radio" name="ptabs" id="pt-home" checked hidden>
+    <input type="radio" name="ptabs" id="pt-articles" hidden>
+    <input type="radio" name="ptabs" id="pt-enews" hidden>
+    <input type="radio" name="ptabs" id="pt-newsletter" hidden>
 
-  <div class="placement-panels">
-    <div class="ppanel active" id="p-home">
-      <div>
-        <div class="pp-label">Website — Home Page</div>
-        <div class="pp-title">LEADERBOARD<br>HOME PAGE AD</div>
-        <div class="pp-desc">The first impression for every reader who types Retail-Insider.com directly into their browser. Three spots only — the scarcest, highest-visibility placement on the entire platform.</div>
-        <div class="pp-specs">
-          <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">728 × 90 px</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Availability</span><span class="pp-spec-val">3 Spots Only</span></div>
-        </div>
-      </div>
-      <div class="pp-numbers">
-        <div class="pp-num-big"><span class="n">45K</span><span class="l">Monthly Home Page Views</span></div>
-        <div class="pp-num-small">
-          <div class="pp-num-tile"><span class="n">2,500</span><span class="l">Avg Monthly Clicks per Ad</span></div>
-          <div class="pp-num-tile"><span class="n">3</span><span class="l">Total Spots Available</span></div>
-        </div>
-      </div>
+    <div class="placements-tabs">
+      <label class="ptab" for="pt-home">Home Page</label>
+      <label class="ptab" for="pt-articles">Exclusive Articles</label>
+      <label class="ptab" for="pt-enews">eNews Page</label>
+      <label class="ptab" for="pt-newsletter">Newsletter</label>
     </div>
 
-    <div class="ppanel" id="p-articles">
-      <div>
-        <div class="pp-label">Website — Exclusive Content</div>
-        <div class="pp-title">ARTICLE PAGE<br>ADS</div>
-        <div class="pp-desc">Embedded within the 5–9 breaking news articles published daily. Two formats required — Leaderboard across the top, Square in the sidebar. Readers are in-context and engaged with industry content when your ad appears.</div>
-        <div class="pp-specs">
-          <div class="pp-spec"><span class="pp-spec-label">Leaderboard</span><span class="pp-spec-val">600 × 150 px</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Square</span><span class="pp-spec-val">300 × 300 px</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Both Formats</span><span class="pp-spec-val">Required</span></div>
+    <div class="placement-panels">
+      <div class="ppanel" id="p-home">
+        <div>
+          <div class="pp-label">Website — Home Page</div>
+          <div class="pp-title">LEADERBOARD<br>HOME PAGE AD</div>
+          <div class="pp-desc">The first impression for every reader who types Retail-Insider.com directly into their browser. Three spots only — the scarcest, highest-visibility placement on the entire platform.</div>
+          <div class="pp-specs">
+            <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">728 × 90 px</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Availability</span><span class="pp-spec-val">3 Spots Only</span></div>
+          </div>
+        </div>
+        <div class="pp-numbers">
+          <div class="pp-num-big"><span class="n">45K</span><span class="l">Monthly Home Page Views</span></div>
+          <div class="pp-num-small">
+            <div class="pp-num-tile"><span class="n">2,500</span><span class="l">Avg Monthly Clicks per Ad</span></div>
+            <div class="pp-num-tile"><span class="n">3</span><span class="l">Total Spots Available</span></div>
+          </div>
         </div>
       </div>
-      <div class="pp-numbers">
-        <div class="pp-num-big"><span class="n">5–9</span><span class="l">Articles Published Daily</span></div>
-        <div class="pp-num-small">
-          <div class="pp-num-tile"><span class="n">1,800</span><span class="l">Avg Monthly Clicks per Ad</span></div>
-          <div class="pp-num-tile"><span class="n">510K</span><span class="l">Monthly Page Views</span></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="ppanel" id="p-enews">
-      <div>
-        <div class="pp-label">Website — eNews Section</div>
-        <div class="pp-title">ENEWS PAGE<br>LEADERBOARD</div>
-        <div class="pp-desc">The "Canadian Retail News From Around The Web" aggregator is a daily destination for readers who want every story in one place. 2,500 average daily page views from loyal return visitors.</div>
-        <div class="pp-specs">
-          <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">600 × 150 px</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+      <div class="ppanel" id="p-articles">
+        <div>
+          <div class="pp-label">Website — Exclusive Content</div>
+          <div class="pp-title">ARTICLE PAGE<br>ADS</div>
+          <div class="pp-desc">Embedded within the 5–9 breaking news articles published daily. Two formats required — Leaderboard across the top, Square in the sidebar. Readers are in-context and engaged with industry content when your ad appears.</div>
+          <div class="pp-specs">
+            <div class="pp-spec"><span class="pp-spec-label">Leaderboard</span><span class="pp-spec-val">600 × 150 px</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Square</span><span class="pp-spec-val">300 × 300 px</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Both Formats</span><span class="pp-spec-val">Required</span></div>
+          </div>
+        </div>
+        <div class="pp-numbers">
+          <div class="pp-num-big"><span class="n">5–9</span><span class="l">Articles Published Daily</span></div>
+          <div class="pp-num-small">
+            <div class="pp-num-tile"><span class="n">1,800</span><span class="l">Avg Monthly Clicks per Ad</span></div>
+            <div class="pp-num-tile"><span class="n">510K</span><span class="l">Monthly Page Views</span></div>
+          </div>
         </div>
       </div>
-      <div class="pp-numbers">
-        <div class="pp-num-big"><span class="n">2,500</span><span class="l">Average Daily Page Views</span></div>
-        <div class="pp-num-small">
-          <div class="pp-num-tile"><span class="n">1,700</span><span class="l">Avg Monthly Clicks per Ad</span></div>
-          <div class="pp-num-tile"><span class="n">Daily</span><span class="l">New Content Published</span></div>
-        </div>
-      </div>
-    </div>
 
-    <div class="ppanel" id="p-newsletter">
-      <div>
-        <div class="pp-label">Email — Daily Newsletter</div>
-        <div class="pp-title">NEWSLETTER<br>LEADERBOARD</div>
-        <div class="pp-desc">Delivered to 19,000+ subscribers every weekday. A 42% open rate means roughly 7,980 people will see your brand in their inbox each day — mostly Canadians who treat this as a morning routine.</div>
-        <div class="pp-specs">
-          <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">728 × 90 px</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
-          <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+      <div class="ppanel" id="p-enews">
+        <div>
+          <div class="pp-label">Website — eNews Section</div>
+          <div class="pp-title">ENEWS PAGE<br>LEADERBOARD</div>
+          <div class="pp-desc">The "Canadian Retail News From Around The Web" aggregator is a daily destination for readers who want every story in one place. 2,500 average daily page views from loyal return visitors.</div>
+          <div class="pp-specs">
+            <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">600 × 150 px</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+          </div>
+        </div>
+        <div class="pp-numbers">
+          <div class="pp-num-big"><span class="n">2,500</span><span class="l">Average Daily Page Views</span></div>
+          <div class="pp-num-small">
+            <div class="pp-num-tile"><span class="n">1,700</span><span class="l">Avg Monthly Clicks per Ad</span></div>
+            <div class="pp-num-tile"><span class="n">Daily</span><span class="l">New Content Published</span></div>
+          </div>
         </div>
       </div>
-      <div class="pp-numbers">
-        <div class="pp-num-big"><span class="n">19K</span><span class="l">Newsletter Subscribers</span></div>
-        <div class="pp-num-small">
-          <div class="pp-num-tile"><span class="n">42%</span><span class="l">Open Rate</span></div>
-          <div class="pp-num-tile"><span class="n">~8K</span><span class="l">Daily Impressions</span></div>
+
+      <div class="ppanel" id="p-newsletter">
+        <div>
+          <div class="pp-label">Email — Daily Newsletter</div>
+          <div class="pp-title">NEWSLETTER<br>LEADERBOARD</div>
+          <div class="pp-desc">Delivered to 19,000+ subscribers every weekday. A 42% open rate means roughly 7,980 people will see your brand in their inbox each day — mostly Canadians who treat this as a morning routine.</div>
+          <div class="pp-specs">
+            <div class="pp-spec"><span class="pp-spec-label">Format</span><span class="pp-spec-val">Leaderboard</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Dimensions</span><span class="pp-spec-val">728 × 90 px</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">File Types</span><span class="pp-spec-val">JPG · PNG · GIF</span></div>
+            <div class="pp-spec"><span class="pp-spec-label">Max File Size</span><span class="pp-spec-val">&lt; 200 KB</span></div>
+          </div>
+        </div>
+        <div class="pp-numbers">
+          <div class="pp-num-big"><span class="n">19K</span><span class="l">Newsletter Subscribers</span></div>
+          <div class="pp-num-small">
+            <div class="pp-num-tile"><span class="n">42%</span><span class="l">Open Rate</span></div>
+            <div class="pp-num-tile"><span class="n">~8K</span><span class="l">Daily Impressions</span></div>
+          </div>
         </div>
       </div>
     </div>
