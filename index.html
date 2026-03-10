@@ -95,7 +95,7 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 
 /* STICKY TABS */
 .sticky-tabs {
-  position:fixed; top:var(--nav-h); left:0; right:0; z-index:99;
+  position:fixed; top:var(--nav-h); left:0; right:0; z-index:50;
   background:var(--panel); border-bottom:1px solid var(--border);
   display:flex; overflow-x:auto; scrollbar-width:none;
   transition:top 0.3s ease;
@@ -276,8 +276,8 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 .ch-desc { font-size:0.92rem; color:var(--muted); line-height:1.7; margin-top:10px; }
 
 /* PLACEMENTS */
-.placements-tabs { display:flex; gap:1px; background:var(--border); margin-top:52px; position:relative; z-index:10; }
-.ptab { flex:1; padding:14px; font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); background:var(--dark); border:none; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; }
+.placements-tabs { display:flex; gap:1px; background:var(--border); margin-top:52px; position:relative; z-index:200; isolation:isolate; }
+.ptab { flex:1; padding:14px; font-size:0.56rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--muted); background:var(--dark); border:none; font-family:'DM Sans',sans-serif; cursor:pointer; transition:all 0.2s; border-bottom:2px solid transparent; position:relative; z-index:200; }
 .ptab:hover { color:var(--off); }
 .ptab.active { color:var(--red); background:var(--card); border-bottom-color:var(--red); }
 .placement-panels { background:var(--card); }
