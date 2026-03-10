@@ -39,7 +39,9 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
   display:flex; align-items:center; justify-content:space-between;
   padding:0 32px;
   transition:transform 0.3s ease;
+  pointer-events:none;
 }
+#nav > * { pointer-events:all; }
 #nav.hidden { transform:translateY(-100%); }
 .nav-brand {
   display:flex; align-items:center; gap:14px;
@@ -99,7 +101,9 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
   background:var(--panel); border-bottom:1px solid var(--border);
   display:flex; overflow-x:auto; scrollbar-width:none;
   transition:top 0.3s ease;
+  pointer-events:none;
 }
+.stab { pointer-events:all; }
 .sticky-tabs::-webkit-scrollbar { display:none; }
 .stab {
   font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase;
