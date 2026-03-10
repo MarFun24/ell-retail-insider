@@ -115,7 +115,7 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 /* COVER */
 .cover {
   min-height:100vh; display:flex; flex-direction:column;
-  justify-content:flex-end; padding:100px 60px 72px;
+  justify-content:flex-end; padding:60px 60px 72px;
   position:relative; overflow:hidden;
   background:var(--black);
 }
@@ -127,7 +127,7 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
     repeating-linear-gradient(0deg, transparent, transparent 79px, rgba(255,255,255,0.018) 80px);
 }
 .cover-ticker {
-  position:absolute; top:var(--nav-h); left:0; right:0;
+  position:relative; top:auto; left:auto; right:auto;
   background:var(--red); padding:8px 0; overflow:hidden;
   white-space:nowrap;
 }
@@ -141,10 +141,7 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 .ticker-sep { color:rgba(255,255,255,0.4); }
 @keyframes ticker { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
-.cover-eyebrow {
-  font-size:0.6rem; letter-spacing:0.35em; text-transform:uppercase;
-  color:var(--red); margin-bottom:24px; animation:fadeUp 0.9s ease both;
-}
+.cover-eyebrow { display:none; }
 .cover-kicker {
   font-family:'Bebas Neue',sans-serif;
   font-size:clamp(5rem,14vw,11rem); line-height:0.92;
@@ -236,17 +233,15 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
 .partner-logo img {
   height:28px; width:auto; max-width:110px;
   object-fit:contain; display:block;
-  filter:brightness(0) invert(1);
 }
 .partner-logo.lg-tall img   { height:22px; }
 .partner-logo.lg-wide img   { height:20px; max-width:130px; }
 .partner-logo.lg-xwide img  { height:18px; max-width:150px; }
 .partner-logo.lg-small img  { height:24px; max-width:80px; }
 .partner-logo.lg-square img { height:32px; max-width:80px; }
-/* Logos that are already white or work best without inversion */
+/* Logos that need inversion (dark logos on dark background) */
+.partner-logo.invert img { filter:brightness(0) invert(1); }
 .partner-logo.no-invert img { filter:none; }
-/* Logos that need brightness boost but not full invert */
-.partner-logo.brighten img { filter:brightness(0) invert(1) opacity(0.9); }
 
 /* AUDIENCE GRID */
 .aud-grid { display:grid; grid-template-columns:1fr 1fr; gap:1px; background:var(--border); margin-top:52px; }
@@ -519,12 +514,12 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
       <div class="partner-logo lg-small"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/rbc-4-logo-png-transparent_utpmfl.png" alt="RBC"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/walmart_logo_png_2024_by_wcwjunkbox_diozqmj-fullview_v02wyl.png" alt="Walmart"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/JLL-logo-white-300px_hwodzt.png" alt="JLL"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166205/edelman-logo-png-3-1_mi4k6r.png" alt="Edelman"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166205/edelman-logo-png-3-1_mi4k6r.png" alt="Edelman"></div>
       <div class="partner-logo"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166204/shopify-logo_a1xpee.png" alt="Shopify"></div>
-      <div class="partner-logo lg-square"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/kpmg.D-f0ee9cf2_xb2vhb.png" alt="KPMG"></div>
+      <div class="partner-logo lg-square invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/kpmg.D-f0ee9cf2_xb2vhb.png" alt="KPMG"></div>
       <div class="partner-logo lg-square"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/bgo50prp_elxkmi.png" alt="BGO"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/case-study-cbre-logo_emr7eo.png" alt="CBRE"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/Deloitte-Logo_yifvpr.png" alt="Deloitte"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/Deloitte-Logo_yifvpr.png" alt="Deloitte"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/harry-rosen-coupons_480x480_kage5x.png" alt="Harry Rosen"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/oxford_properties_logo_kkwsdn.png" alt="Oxford Properties"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/TU_BIG.D-a8b1e1ce_riayed.png" alt="TELUS"></div>
@@ -533,9 +528,9 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166211/cf-logo_ki7zv5.png" alt="Cadillac Fairview"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Amazon-Logo-White-PNG-Image_wvvxum.png" alt="Amazon"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/new-PayPal-logo-white-png-horizontal-large-size_p15qvs.png" alt="PayPal"></div>
-      <div class="partner-logo lg-wide no-invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/ls-logo-RedBlack_chqzzj.png" alt="Lightspeed"></div>
+      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/ls-logo-RedBlack_chqzzj.png" alt="Lightspeed"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/the-art-of-costco-png-logo-23_bhrz4k.png" alt="Costco"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Colliers_logo_h8m2wc.png" alt="Colliers"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Colliers_logo_h8m2wc.png" alt="Colliers"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/LVMH_Logo_ww077l.png" alt="LVMH"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/adyen_logo_uigs1m.png" alt="Adyen"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/city-of-toronto-logo-vector-white-300x167_rxnwjf.png" alt="City of Toronto"></div>
@@ -545,12 +540,12 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
       <div class="partner-logo lg-small"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/rbc-4-logo-png-transparent_utpmfl.png" alt="RBC"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/walmart_logo_png_2024_by_wcwjunkbox_diozqmj-fullview_v02wyl.png" alt="Walmart"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166206/JLL-logo-white-300px_hwodzt.png" alt="JLL"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166205/edelman-logo-png-3-1_mi4k6r.png" alt="Edelman"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166205/edelman-logo-png-3-1_mi4k6r.png" alt="Edelman"></div>
       <div class="partner-logo"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166204/shopify-logo_a1xpee.png" alt="Shopify"></div>
-      <div class="partner-logo lg-square"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/kpmg.D-f0ee9cf2_xb2vhb.png" alt="KPMG"></div>
+      <div class="partner-logo lg-square invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/kpmg.D-f0ee9cf2_xb2vhb.png" alt="KPMG"></div>
       <div class="partner-logo lg-square"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/bgo50prp_elxkmi.png" alt="BGO"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/case-study-cbre-logo_emr7eo.png" alt="CBRE"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/Deloitte-Logo_yifvpr.png" alt="Deloitte"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/Deloitte-Logo_yifvpr.png" alt="Deloitte"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/harry-rosen-coupons_480x480_kage5x.png" alt="Harry Rosen"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/oxford_properties_logo_kkwsdn.png" alt="Oxford Properties"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166202/TU_BIG.D-a8b1e1ce_riayed.png" alt="TELUS"></div>
@@ -559,9 +554,9 @@ body { background:var(--black); color:var(--white); font-family:'DM Sans',sans-s
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166211/cf-logo_ki7zv5.png" alt="Cadillac Fairview"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Amazon-Logo-White-PNG-Image_wvvxum.png" alt="Amazon"></div>
       <div class="partner-logo lg-xwide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/new-PayPal-logo-white-png-horizontal-large-size_p15qvs.png" alt="PayPal"></div>
-      <div class="partner-logo lg-wide no-invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/ls-logo-RedBlack_chqzzj.png" alt="Lightspeed"></div>
+      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166210/ls-logo-RedBlack_chqzzj.png" alt="Lightspeed"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/the-art-of-costco-png-logo-23_bhrz4k.png" alt="Costco"></div>
-      <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Colliers_logo_h8m2wc.png" alt="Colliers"></div>
+      <div class="partner-logo lg-wide invert"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/Colliers_logo_h8m2wc.png" alt="Colliers"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/LVMH_Logo_ww077l.png" alt="LVMH"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/adyen_logo_uigs1m.png" alt="Adyen"></div>
       <div class="partner-logo lg-wide"><img src="https://res.cloudinary.com/ded9cb1wd/image/upload/v1773166208/city-of-toronto-logo-vector-white-300x167_rxnwjf.png" alt="City of Toronto"></div>
